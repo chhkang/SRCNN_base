@@ -65,11 +65,11 @@ def train(epoch):
         optimizer.zero_grad()
         model_out = srcnn(input)
         loss = criterion(model_out, target)
-        epoch_loss += loss.data[0]
+        epoch_loss += loss.item()
         loss.backward()
         optimizer.step()
 
-        print("===> Epoch[{}]({}/{}): Loss: {:.4f}".format(epoch, iteration, len(training_data_loader), loss.data[0]))
+        print("===> Epoch[{}]({}/{}): Loss: {:.4f}".format(epoch, iteration, len(training_data_loader), loss.item()))
 
     print("===> Epoch {} Complete: Avg. Loss: {:.4f}".format(epoch, epoch_loss / len(training_data_loader)))
 
@@ -86,7 +86,7 @@ def test():
 
         prediction = srcnn(input)
         mse = criterion(prediction, target)
-        psnr = 10 * log10(1 / mse.data[0])
+        psnr = 10 * log10(1 / mse.item())
         avg_psnr += psnr
     print("===> Avg. PSNR: {:.4f} dB".format(avg_psnr / len(testing_data_loader)))
 

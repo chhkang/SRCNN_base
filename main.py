@@ -42,7 +42,7 @@ training_data_loader = DataLoader(dataset=train_set, num_workers=opt.threads, ba
 testing_data_loader = DataLoader(dataset=test_set, num_workers=opt.threads, batch_size=opt.test_batch_size, shuffle=False)
 
 
-srcnn = SRCNN()
+srcnn = SRCNN(upscale_factor= opt.upscale_factor)
 criterion = nn.MSELoss()
 
 
